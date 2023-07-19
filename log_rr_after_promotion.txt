@@ -1,0 +1,103 @@
+[root@ip-10-1-10-125 ec2-user]# mysql -h dbreadreplica.cibhvgxcw1s8.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> show tables;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| person            |
++-------------------+
+1 row in set (0.01 sec)
+
+MySQL [udacity]> select * from person;
++----------------+------------+--------------+
+| fullname       | birthday   | phone_number |
++----------------+------------+--------------+
+| Dinh Dang Khoa | 1999-10-02 | 0398122553   |
++----------------+------------+--------------+
+1 row in set (0.01 sec)
+
+MySQL [udacity]> insert person values ('Hoang The Quynh', '2000-10-02', '03995')
+    -> Ctrl-C -- exit!
+Aborted
+[root@ip-10-1-10-125 ec2-user]# clear
+[root@ip-10-1-10-125 ec2-user]# mysql -h dbreadreplica.cibhvgxcw1s8.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> show tables;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| person            |
++-------------------+
+1 row in set (0.00 sec)
+
+MySQL [udacity]> select * from person;
++----------------+------------+--------------+
+| fullname       | birthday   | phone_number |
++----------------+------------+--------------+
+| Dinh Dang Khoa | 1999-10-02 | 0398122553   |
++----------------+------------+--------------+
+1 row in set (0.00 sec)
+
+MySQL [udacity]> insert person values ('Hoang The Quynh', '2000-10-26', '0399548060');
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [udacity]> select * from person;
++-----------------+------------+--------------+
+| fullname        | birthday   | phone_number |
++-----------------+------------+--------------+
+| Dinh Dang Khoa  | 1999-10-02 | 0398122553   |
+| Hoang The Quynh | 2000-10-26 | 0399548060   |
++-----------------+------------+--------------+
+2 rows in set (0.00 sec)
+
+MySQL [udacity]>

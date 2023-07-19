@@ -1,0 +1,110 @@
+Using username "ec2-user".
+Authenticating with public key "udacity-sa-keypair"
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+No packages needed for security; 2 packages available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-10-1-10-12 ~]$ sudo su
+[root@ip-10-1-10-12 ec2-user]# yum install mysql
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+--> Running transaction check
+---> Package mariadb.x86_64 1:5.5.68-1.amzn2.0.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================================================================================================================
+ Package                                              Arch                                                Version                                                              Repository                                               Size
+=============================================================================================================================================================================================================================================
+Installing:
+ mariadb                                              x86_64                                              1:5.5.68-1.amzn2.0.1                                                 amzn2-core                                              8.8 M
+
+Transaction Summary
+=============================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 8.8 M
+Installed size: 49 M
+Is this ok [y/d/N]: y
+Downloading packages:
+mariadb-5.5.68-1.amzn2.0.1.x86_64.rpm                                                                                                                                                                                 | 8.8 MB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 1:mariadb-5.5.68-1.amzn2.0.1.x86_64                                                                                                                                                                                       1/1
+  Verifying  : 1:mariadb-5.5.68-1.amzn2.0.1.x86_64                                                                                                                                                                                       1/1
+
+Installed:
+  mariadb.x86_64 1:5.5.68-1.amzn2.0.1
+
+Complete!
+[root@ip-10-1-10-12 ec2-user]# mysql -h database-primary.cdq2hhdl5syt.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> SHOW DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE' at line 1
+MySQL [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Database changed
+MySQL [udacity]> SHOW TABLES;
+Empty set (0.00 sec)
+
+MySQL [udacity]> create table person (fullname varchar(255), birthday date, phone_number varchar(255));
+Query OK, 0 rows affected (0.07 sec)
+
+MySQL [udacity]> SHOW TABLES;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| person            |
++-------------------+
+1 row in set (0.00 sec)
+
+MySQL [udacity]> describe person;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| fullname     | varchar(255) | YES  |     | NULL    |       |
+| birthday     | date         | YES  |     | NULL    |       |
+| phone_number | varchar(255) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+MySQL [udacity]> insert person values ('Dinh Dang Khoa', '1999-10-02', '0398122553');
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [udacity]> select * from person;
++----------------+------------+--------------+
+| fullname       | birthday   | phone_number |
++----------------+------------+--------------+
+| Dinh Dang Khoa | 1999-10-02 | 0398122553   |
++----------------+------------+--------------+
+1 row in set (0.00 sec)
+
+MySQL [udacity]>

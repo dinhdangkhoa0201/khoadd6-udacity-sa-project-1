@@ -1,0 +1,12 @@
+1. Minimun RTO for a single AZ outage
+	-	In the event of an Availability Zone (AZ) outage, where one AZ becomes unavailable, the RTO for a Multi-AZ database is typically minimal. This is because the database automatically fails over to the standby replica in the alternate AZ, ensuring high availability and minimal downtime. The failover process is automated and typically takes only a few minutes, resulting in a low RTO.
+	
+2. Minimum RTO for a single region outage
+	-	In the event of a complete region outage, where all AZs within a region become unavailable, the RTO for a Multi-AZ database can vary depending on the recovery process. If a cross-region read replica is in place, the failover to the replica in the alternate region can be automated, resulting in a relatively low RTO. However, if a cross-region read replica is not configured, the failover process may require manual intervention and coordination, leading to a longer RTO.
+	
+3. Minimum RPO for a single AZ outage
+	-	The Recovery Point Objective (RPO) represents the maximum acceptable data loss in the event of a failure. For a Multi-AZ database, the RPO for a single AZ outage is typically minimal. This is because the standby replica in the alternate AZ is continuously synchronized with the primary database, ensuring near-real-time data replication. As a result, the data loss is minimal, usually within seconds or less.
+
+4. Minimum RPO for a single region outage
+	-	In the event of a complete region outage, the RPO for a Multi-AZ database can vary depending on the replication setup. If a cross-region read replica is in place, the data replication between regions ensures a low RPO, typically within seconds or less. However, if a cross-region read replica is not configured, the RPO may be higher, as it relies on the frequency of backups and the time taken to restore the database in the alternate region.
+	
